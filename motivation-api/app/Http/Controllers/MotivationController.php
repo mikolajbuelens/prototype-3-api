@@ -22,7 +22,11 @@ class MotivationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $motivation = new Motivation();
+        $motivation->quote = $request->quote;
+        $motivation->author = $request->author;
+        $motivation->save();
+        return response()->json($motivation);
     }
 
     /**
@@ -44,8 +48,10 @@ class MotivationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Motivation $motivation)
-    {
-        //
+    public function destroy($id)
+    {http://127.0.0.1:8000/api/motivation
+        $motivation = Motivation::find($id);
+        $motivation->delete();
+        return response()->json(null, 204);
     }
 }
